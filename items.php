@@ -1,34 +1,35 @@
-<?php 
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
 
-require 'connection.php';
+    <body>
+       
+        <?php require "items_data.php" ?>
 
-$mysqli->set_charset("utf8mb4");
 
-if(is_numeric($_GET["id"])) {
-    $id = $_GET["id"];
-} else {
-    $id = 0;
-}
+        <script>
+            function addAmount(itemId)
+            {
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open("GET", "http://localhost/jodolrui/casa/item_add.php?id="+itemId+"&amount=1", false); // false for synchronous request
+                xmlHttp.send(null);
+                //return xmlHttp.responseText;
+                location.reload();
+            }
 
-$sql = 'SELECT i.Description, s.Amount FROM stock s INNER JOIN items i ON i.ID = s.ItemID WHERE s.ID = ' . $id;
+            function subtractAmount(itemId)
+            {
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open("GET", "http://localhost/jodolrui/casa/item_subtract.php?id="+itemId+"&amount=1", false); // false for synchronous request
+                xmlHttp.send(null);
+                //return xmlHttp.responseText;
+                location.reload();
+            }
+        </script>
 
-$result = $mysqli->query($sql);
+    </body>
 
-#printf("%s\r\n", $result->num_rows);
-
-$i=0;
-
-foreach ($result as $row){
-    $i=$i+1;
-    printf(
-        "%s;%s;%s\r\n",
-        $i,
-        htmlspecialchars($row['Description'], ENT_QUOTES),
-        htmlspecialchars($row['Amount'], ENT_QUOTES)
-    );
-
-}
-
-$mysqli->close();
-
-?>
+</html>

@@ -1,0 +1,25 @@
+body {
+    background-color: lightcoral;
+    color: black;
+  }
+  
+  /* On screens that are 992px wide or less, the background color is blue */
+  @media screen and (max-width: 992px) {
+    * {
+        font-size: 5vw;
+    }
+    
+    
+    body {
+      background-color: beige;
+      font-size: 5vw;
+    }
+
+    td th p {
+        font-size: 5vw;
+    }
+
+    table {
+        width: 100%;
+    }
+  }
